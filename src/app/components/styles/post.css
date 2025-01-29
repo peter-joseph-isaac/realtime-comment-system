@@ -1,0 +1,21 @@
+#main-post {
+    border: 1px solid black;
+    width: 642px;
+    height: 120px;
+}
+
+#post-button-holder {
+    width: 642px;
+    height: 50px;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#mainButton {
+    border: 1px solid black;
+    width: 45px;
+    height: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+}

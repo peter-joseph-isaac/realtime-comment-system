@@ -1,0 +1,312 @@
+#more {
+    background: -moz-linear-gradient(top, #ECECEC 1%, #CFCFCF 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(1%, #ECECEC), color-stop(100%, #CFCFCF));
+    background: -webkit-linear-gradient(top, #ECECEC 1%, #CFCFCF 100%);
+    background: -o-linear-gradient(top, #ECECEC 1%, #CFCFCF 100%);
+    background: -ms-linear-gradient(top, #ECECEC 1%, #CFCFCF 100%);
+    background: linear-gradient(top, #ECECEC 1%, #CFCFCF 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ECECEC', endColorstr='#CFCFCF', GradientType=0);
+    padding: 5px 0 5px 0;
+    border: 1px solid #c0c0c0;
+    font: bold 12px Arial, sans-serif;
+    color: #e3272a;
+    margin: 10px 0 0 0;
+    text-transform: uppercase;
+    text-align: center;
+    font-style: italic;
+    -webkit-border-radius: 0em;
+    border-radius: 0em;
+    cursor: pointer;
+  }
+  
+  .slide-container {
+      width: 642px;
+    }
+    
+    .card {
+      background: -moz-linear-gradient(top, #ECECEC 1%, #CFCFCF 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(1%, #ECECEC), color-stop(100%, #CFCFCF));
+      background: -webkit-linear-gradient(top, #ECECEC 1%, #CFCFCF 100%);
+      background: -o-linear-gradient(top, #ECECEC 1%, #CFCFCF 100%);
+      background: -ms-linear-gradient(top, #ECECEC 1%, #CFCFCF 100%);
+      background: linear-gradient(top, #ECECEC 1%, #CFCFCF 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ECECEC', endColorstr='#CFCFCF', GradientType=0);
+      width: auto;
+      min-height: 80px;
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+      border: 1px solid #c0c0c0;
+    }
+    
+    .top {
+      width: 500px;
+      min-height: 50px;
+    }
+    
+    .middle {
+      width: 500px;
+      min-height: 16px;
+      display:flex;
+      flex-direction: row-reverse;
+    }
+    
+    .bottom {
+      width: 500px;
+      height: 25px;
+    }
+    
+    .title-wrap {
+      display: flex;
+      flex-direction: row;
+      width: 500px;
+      height: 100%;
+    }
+    
+    .main-picture {
+      width: 48px;
+      height: 48px;
+    }
+    
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      padding-left: 10px;
+    }
+    
+    .name {
+      font-size: 24px;
+      width: 300px;
+    }
+    
+    .content {
+      font-size: 15px;
+      word-break: break-word;
+    }
+    
+    .footer-container {
+      width: 500px;
+      height: 25px;
+      display: flex;
+      flex-direction: row;
+    }
+    
+    .icon {
+      margin-top: 5px;
+      margin-left: 5px;
+    }
+    
+    .date {
+      margin-top: 5px;
+      margin-left: 25px;
+    }
+    
+    .like {
+      margin-top: 5px;
+      margin-left: 45px;
+      padding-left: 20px;
+      cursor: pointer;
+      background: url("./images/like-icon.png") no-repeat scroll 0 -2px transparent;
+    }
+  
+    .like:hover {
+      margin-top: 5px;
+      margin-left: 45px;
+      padding-left: 20px;
+      cursor: pointer;
+      background: url("./images/like-icon-hover.png") no-repeat scroll 0 -2px transparent;
+    }
+    
+    .flag {
+      margin-top: 5px;
+      margin-left: 45px;
+      padding-left: 20px;
+      background: url("./images/flag-icon.png") no-repeat scroll 0 -2px transparent;
+      cursor: pointer;
+    }
+  
+    .flag:hover {
+      margin-top: 5px;
+      margin-left: 45px;
+      padding-left: 20px;
+      background: url("./images/flag-icon-hover.png") no-repeat scroll 0 -2px transparent;
+      cursor: pointer;
+    }
+  
+    .reply-button {
+      margin-top: 5px;
+    margin-left: 45px;
+    padding-left: 20px;
+    background: url("./images/reply-icon.png") no-repeat scroll 0 -2px transparent;
+    cursor: pointer;
+  }
+  
+  .reply-button:hover {
+      margin-top: 5px;
+    margin-left: 45px;
+    padding-left: 20px;
+    background: url("./images/reply-icon-hover.png") no-repeat scroll 0 -2px transparent;
+    cursor: pointer;
+  }
+    
+    .reply-slide-container {
+      margin-top: 5px;
+      margin-left: 45px;
+      cursor: pointer;
+      padding-bottom: 15px;
+    }
+    
+    .reply-holder {
+      width: 642px;
+      min-height: 20px;
+      padding-top: 10px;
+    }
+  
+    .like-container {
+      width: 450px;
+    }
+  
+    .l-this {
+      padding-left: 5px;
+    }
+  
+    .reply-holder {
+      width: 642px;
+      padding-top: 10px;
+    }
+    
+    .reply-slide-container {
+      width: 642px;
+    }
+    
+    .reply-card {
+      background: -moz-linear-gradient(top, #ECECEC 1%, #CFCFCF 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(1%, #ECECEC), color-stop(100%, #CFCFCF));
+      background: -webkit-linear-gradient(top, #ECECEC 1%, #CFCFCF 100%);
+      background: -o-linear-gradient(top, #ECECEC 1%, #CFCFCF 100%);
+      background: -ms-linear-gradient(top, #ECECEC 1%, #CFCFCF 100%);
+      background: linear-gradient(top, #ECECEC 1%, #CFCFCF 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ECECEC', endColorstr='#CFCFCF', GradientType=0);
+      width: auto;
+      min-height: 80px;
+      display: flex;
+      flex-direction: column;
+      padding: 5px;
+      cursor: auto;
+      border: 1px solid #c0c0c0;
+    }
+    
+    .reply-top {
+      width: 400px;
+      min-height: 50px;
+    }
+    
+    .reply-middle {
+      width: 400px;
+      min-height: 5px;
+    }
+    
+    .reply-bottom {
+      width: 400px;
+      height: 25px;
+    }
+    
+    .reply-title-wrap {
+      display: flex;
+      flex-direction: row;
+      width: 400px;
+      height: 100%;
+    }
+    
+    .reply-main-picture {
+      width: 48px;
+      height: 48px;
+    }
+    
+    .reply-main-content {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      padding-left: 10px;
+    }
+    
+    .reply-name {
+      font-size: 24px;
+      width: 400px;
+    }
+    
+    .reply-content {
+      font-size: 15px;
+      word-break: break-word;
+    }
+    
+    .reply-footer-container {
+      width: 400px;
+      height: 25px;
+      display: flex;
+      flex-direction: row;
+    }
+    
+    .reply-icon {
+      margin-top: 5px;
+      margin-left: 5px;
+    }
+    
+    .reply-date {
+      margin-top: 5px;
+      margin-left: 25px;
+    }
+    
+    .reply-like {
+      margin-top: 5px;
+      margin-left: 45px;
+      padding-left: 20px;
+      cursor: pointer;
+      background: url("./images/like-icon.png") no-repeat scroll 0 -2px transparent;
+    }
+  
+    .reply-like:hover {
+      margin-top: 5px;
+      margin-left: 45px;
+      padding-left: 20px;
+      cursor: pointer;
+      background: url("./images/like-icon-hover.png") no-repeat scroll 0 -2px transparent;
+    }
+    
+    .reply-flag {
+      margin-top: 5px;
+      margin-left: 45px;
+      padding-left: 20px;
+      background: url("./images/flag-icon.png") no-repeat scroll 0 -2px transparent;
+      cursor: pointer;
+    }
+    
+    .reply-flag:hover {
+      margin-top: 5px;
+      margin-left: 45px;
+      padding-left: 20px;
+      background: url("./images/flag-icon-hover.png") no-repeat scroll 0 -2px transparent;
+      cursor: pointer;
+    }
+  
+  
+    .reply-reply {
+      margin-top: 5px;
+      margin-left: 45px;
+      padding-left: 20px;
+      background: url("./images/reply-icon.png") no-repeat scroll 0 -2px transparent;
+      cursor: pointer;
+    }
+    
+  
+    .reply-reply:hover {
+      margin-top: 5px;
+      margin-left: 45px;
+      padding-left: 20px;
+      background: url("./images/reply-icon-hover.png") no-repeat scroll 0 -2px transparent;
+      cursor: pointer;
+    }
+    

@@ -1,0 +1,161 @@
+.main-card-holder {
+    width: 642px;
+    min-height: 80px;
+    background-color: #ececec;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+} 
+
+.main-card {
+    width: 642px;
+    min-height: 70px;
+    background: -moz-linear-gradient(top, #ECECEC 1%, #CFCFCF 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(1%, #ECECEC), color-stop(100%, #CFCFCF));
+    background: -webkit-linear-gradient(top, #ECECEC 1%, #CFCFCF 100%);
+    background: -o-linear-gradient(top, #ECECEC 1%, #CFCFCF 100%);
+    background: -ms-linear-gradient(top, #ECECEC 1%, #CFCFCF 100%);
+    background: linear-gradient(top, #ECECEC 1%, #CFCFCF 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ECECEC', endColorstr='#CFCFCF', GradientType=0);
+    padding: 10px;
+    border: 1px solid #c0c0c0;
+    -webkit-border-radius: 0em;
+    border-radius: 0em;
+}
+
+.main-card-top {
+    width: 630px;
+    min-height: 50px;
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+.main-card-avi {
+    width: 48px;
+    min-height: 48px;
+    background-color: transparent;
+}
+
+.main-card-body {
+    width: 577px;
+    min-height: 50px;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding-left: 15px;
+}
+
+.main-card-name {
+    width: 300px;
+    height: 30px;
+    background-color: transparent;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.main-card-text {
+    width: 400px;
+    background-color: transparent;
+    color: #333;
+    font-size: 13px;
+    font-weight: bold;
+    word-break: break-word;
+    line-height: 1;
+}
+
+.main-card-text img{
+    max-width: 500px !important;
+}
+
+.main-card-like-container {
+    width: 400px;
+    height: 20px;
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+.main-card-like-thumb {
+    width: 16px;
+    height: 16px;
+    background-color: transparent;
+}
+
+.main-card-like-likers {
+    width: 200px;
+    height: 20px;
+    background-color: transparent;
+}
+
+.main-card-footer {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    width: 642px;
+    height: 19.5px;
+    background-color: transparent;
+}
+
+.main-card-icon{
+    background-color: transparent;
+}
+
+.main-card-date {
+    width: 50px;
+    background-color: transparent;
+    color: black;
+    font-size: 13px;
+    font-weight: bold;
+    margin-left: 40px;
+}
+
+.main-card-like {
+    background-color: transparent;
+    color: black;
+    font-size: 13px;
+    font-weight: bold;
+    margin-left: 40px;
+}
+
+.main-card-flag {
+    background-color: transparent;
+    color: black;
+    font-size: 13px;
+    font-weight: bold;
+    margin-left: 40px;
+}
+
+.main-card-reply {
+    background-color: transparent;
+    color: black;
+    font-size: 13px;
+    font-weight: bold;
+    margin-left: 40px;
+}
+
+.main-card-basement {
+    width: 642px;
+    height: 25px;
+    background-color: transparent;
+}
+
+/* 
+shared css between main and reply cards
+*/
+
+.like {
+    cursor: pointer;
+}
+
+.flag {
+    cursor: pointer;
+}
+
+.reply {
+    cursor: pointer;
+}

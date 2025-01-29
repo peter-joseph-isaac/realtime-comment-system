@@ -1,0 +1,38 @@
+#top-main {
+    display: flex;
+    flex-direction: row;
+}
+
+#top-left {
+    background-color: transparent;
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+}
+
+#top-right {
+    background-color: transparent;
+    width: 342px;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#main-pic {
+    width: 70px;
+    height: 70px;
+}
+
+#main-name {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#sign-out-button {
+    width: 75px;
+    height: 30px;
+    color: #333333;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 1px solid #333333;
+}
