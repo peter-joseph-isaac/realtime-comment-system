@@ -9,7 +9,7 @@ function Page() {
       <div id="main">
         <div id="nav"></div>
         <div id="banner">
-          <img src="/banner.jpg" alt="Banner" />
+          
         </div>
         <div id="social-icons"></div>
         <Top />
