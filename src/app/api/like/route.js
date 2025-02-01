@@ -1,73 +1,62 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "../auth/[...nextauth]/route"; // Import authOptions
-import validator from 'validator'; // very important to validate the session data as well 
-import xss from 'xss'; // strips any harmful html 
+import { authOptions } from "../auth/[...nextauth]/route";
+import xss from 'xss';
 import Ably from 'ably';
-import { v4 as uuidv4 } from 'uuid';
-import { request } from "express";
+
 
 export async function POST(req) {
-  // Retrieve the session using getServerSession
-  const session = await getServerSession(authOptions);
 
-  // If no session, return an error response
-  if (!session) {
-    return new Response(
-      JSON.stringify({ message: "Unauthorized" }),
-      { status: 401 }
-    );
-  }
+    const session = await getServerSession(authOptions);
 
-  // If there's a session, you can proceed with your logic
-  const requestBody = await req.json(); // Get the body of the POST request
-  
-  // perform more logic like sanitizing user input from the message body...
+    if (!session) {
+        return new Response(
+            JSON.stringify({ message: "Unauthorized" }),
+            { status: 401 }
+        );
+    }
 
-  
-  const msgtype = 'like';
-  const name = session.user.name;
-  const picture = session.user.image;
-  const idd = uuidv4();
-  const replyid = idd+'reply';
-  const parentId = requestBody.commentId;
+    const requestBody = await req.json();
 
 
-  const comment = {
-    type: msgtype,
-    id: idd, 
-    reply: replyid,
-    username: name,
-    avi: picture,
-    parentId: parentId
-}
-console.log(comment);
-// checks for empty comment..
-  
-  // checks if all spaces..
-  
-  // check more stuff like the image links and more session info...
+    if(requestBody.likeId !== session.user.id){
+        return new Response(
+            JSON.stringify({ message: "Unauthorized"}),
+            { status: 401 }
+        );
+    }
 
-  
+    const sanitizedComId = xss(requestBody.comId);
+    const sanitizedId = xss(requestBody.likeId);
 
-  // here we would continue with the logic of inserting to a database..
-  // as well as sending it to realtime like ably or socket io 
+    if (!sanitizedComId) {
+        console.log("Empty Comment");
+        return new Response(
+            JSON.stringify({ message: "Comment and or Like ID is empty." }),
+            { status: 400 }
+        );
+    }
 
-  const ably = new Ably.Rest({ key: process.env.ABLY_API_KEY });
 
-    // Get the channel you want to publish the message to
-    const channel = ably.channels.get('channel1');
+    const comment = {
+        type: 'like',
+        id: session.user.id,
+        likeId: sanitizedId
+    };
 
-    // Publish the message to the channel
-    await channel.publish('message', comment);
- 
-  
-  // Example: Log the session info and request body
-  console.log("Session:", session);
+    try {
+        const ably = new Ably.Rest({ key: process.env.ABLY_API_KEY });
+        const channel = ably.channels.get('channel1');
+        await channel.publish('message', comment);
+        return new Response(
+            JSON.stringify({ message: "Request processed successfully" }),
+            { status: 200 }
+        );
+    } catch (error) {
+        console.error("There has been an error", error);
+        return new Response(
+            JSON.stringify({ message: "Failed to send the deleted comment to Ably" }),
+            { status: 500 }
+        );
+    }
 
-  // Process your request here (e.g., save data to the database)
-  
-  return new Response(
-    JSON.stringify({ message: "Request processed successfully" }),
-    { status: 200 }
-  );
 }

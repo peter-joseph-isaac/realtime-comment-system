@@ -91,6 +91,23 @@ export default function Comments() {
     }
   };
 
+  const handleLike = async (comId, likeId) => {
+    try {
+      const response = await fetch('/api/like', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ comId, likeId }),
+        credentials: 'same-origin',
+      });
+      if(!response.ok) {
+        alert('Something went wrong liking comment.');
+      }
+    } catch (error) {
+      console.error('There was an error', error);
+    }
+  };
 
   const renderTextWithImages = (text) => {
     const regex = /(https?:\/\/[^\s]+(?:\.jpg|\.jpeg|\.png|\.gif))/g;  // Match image URLs
@@ -156,7 +173,7 @@ export default function Comments() {
                 )}
 
                   <div className="main-card-footer">
-                    <div className="main-card-icon"><img width={16} height={16} src={null} /></div><div className="main-card-date"></div><div className="main-card-like"><span className="like">Like</span></div><div className="main-card-flag" ><span className="flag" onClick={() => handleDelete(message.data.comid, message.data.id)}>Flag</span></div><div className="main-card-reply"><span className="reply">Comment</span></div>
+                    <div className="main-card-icon"><img width={16} height={16} src={null} /></div><div className="main-card-date"></div><div className="main-card-like"><span className="like" onClick={() => handleLike(message.data.comid, message.data.id)}>Like</span></div><div className="main-card-flag" ><span className="flag" onClick={() => handleDelete(message.data.comid, message.data.id)}>Flag</span></div><div className="main-card-reply"><span className="reply">Comment</span></div>
                   </div>
                 </div>
             <div className="main-card-basement"></div>
