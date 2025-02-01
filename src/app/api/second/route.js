@@ -28,7 +28,7 @@ export async function POST(req) {
 
 // checks for empty comment..
   if (!sanitizedComment) {
-    console.log("Empty Comment");
+    // console.log("Empty Comment");
     return new Response(
         JSON.stringify({ message: "Comment is empty." }),
         { status: 401 }
@@ -71,8 +71,8 @@ export async function POST(req) {
  
   
   // Example: Log the session info and request body
-  console.log("Session:", session);
-  console.log(sanitizedComment);
+  // console.log("Session:", session);
+  // console.log(sanitizedComment);
 
   // Process your request here (e.g., save data to the database)
   

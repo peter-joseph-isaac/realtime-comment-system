@@ -51,11 +51,8 @@ export default function Comments() {
             alert('Flag');
             break;
           case 'delete':
-            setMessages((prevMessages) => {
-              const updatedMessages = [...prevMessages];
-              updatedMessages.splice(index, 1); // Remove the message from the array
-              return updatedMessages;
-            });
+            setMessages((prevMessages) =>
+            prevMessages.filter((msg) => msg.data.comid !== message.data.deleteId));
             break;
           case 'ban':
             alert('Banning User');
@@ -71,13 +68,27 @@ export default function Comments() {
     }
   }, [token]);
 
-  // Handle deletion with a slide-up effect
-  const handleDelete = (index) => {
-    setMessages((prevMessages) => {
-      const updatedMessages = [...prevMessages];
-      updatedMessages.splice(index, 1); // Remove the message from the array
-      return updatedMessages;
-    });
+ 
+  
+
+  const handleDelete = async (msgid, userid) => {
+    try {
+      const response = await fetch('/api/delete', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ msgid, userid }),
+        credentials: 'same-origin', 
+      });
+
+      if (!response.ok) {
+        alert("There has been an error");
+      } 
+    } catch (error) {
+      console.error('Error', error);
+      alert('An error occurred');
+    }
   };
 
 
@@ -117,7 +128,7 @@ export default function Comments() {
             transition={{ duration: 0.3 }}
             style={{ overflow: 'hidden' }}
           >
-            <div className="main-card-holder" onClick={() => handleDelete(index)}>
+            <div className="main-card-holder">
               <div className="main-card">
                 <div className="main-card-top">
                   <div className="main-card-avi">
@@ -145,7 +156,7 @@ export default function Comments() {
                 )}
 
                   <div className="main-card-footer">
-                    <div className="main-card-icon"><img width={16} height={16} src={null} /></div><div className="main-card-date"></div><div className="main-card-like"><span className="like">Like</span></div><div className="main-card-flag"><span className="flag">Flag</span></div><div className="main-card-reply"><span className="reply">Comment</span></div>
+                    <div className="main-card-icon"><img width={16} height={16} src={null} /></div><div className="main-card-date"></div><div className="main-card-like"><span className="like">Like</span></div><div className="main-card-flag" ><span className="flag" onClick={() => handleDelete(message.data.comid, message.data.id)}>Flag</span></div><div className="main-card-reply"><span className="reply">Comment</span></div>
                   </div>
                 </div>
             <div className="main-card-basement"></div>

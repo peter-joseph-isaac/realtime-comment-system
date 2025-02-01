@@ -74,7 +74,7 @@ export default function Post() {
         // If the post was successful
        // alert(data.message); // Success message from the server
        setMessage('');
-        console.log('User:', data.user); // Session data (user info)
+        // console.log('User:', data.user); // Session data (user info)
       } else {
         // If there was an error (e.g., not authenticated)
        // alert(data.message);
