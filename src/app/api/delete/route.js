@@ -44,9 +44,6 @@ export async function POST(req) {
         );
     }
 
-
-
-
     const comment = {
         type: 'delete',
         id: session.user.id,

@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import './styles/commentsystem.css';
 import Ably from 'ably';
-import axios from 'axios';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Comments() {
@@ -13,16 +12,20 @@ export default function Comments() {
   useEffect(() => {
     async function fetchToken() {
       try {
-        const response = await axios.get('/api/ably');
-        setToken(response.data);  // Axios stores the data in the 'data' property
+        const response = await fetch('/api/ably');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setToken(data);  
       } catch (error) {
         console.error('Error fetching token:', error);
       }
     }
-
+  
     fetchToken();
   }, []);
-
+  
   useEffect(() => {
     if (token) {
       const ably = new Ably.Realtime({
@@ -68,9 +71,6 @@ export default function Comments() {
     }
   }, [token]);
 
- 
-  
-
   const handleDelete = async (msgid, userid) => {
     try {
       const response = await fetch('/api/delete', {
@@ -110,20 +110,16 @@ export default function Comments() {
   };
 
   const renderTextWithImages = (text) => {
-    const regex = /(https?:\/\/[^\s]+(?:\.jpg|\.jpeg|\.png|\.gif))/g;  // Match image URLs
-    const parts = text.split(regex); // Split the text into parts, where each part is either regular text or an image URL
+    const regex = /(https?:\/\/[^\s]+(?:\.jpg|\.jpeg|\.png|\.gif))/g;
+    const parts = text.split(regex);
   
     return parts.map((part, index) => {
-      // If the part is a URL, render it as an image
       if (part.match(/https?:\/\/[^\s]+(?:\.jpg|\.jpeg|\.png|\.gif)/)) {
         return <img key={index} src={part} alt="comment image" style={{ maxWidth: '100%' }} />;
       }
-      // Otherwise, return it as regular text
       return <span key={index}>{part}</span>;
     });
   };
-  
-
 
   return (
     <div>
@@ -135,7 +131,7 @@ export default function Comments() {
             initial={{ opacity: 0, height: 0 }}
             animate={{
               opacity: 1,
-              height: 'auto', // Automatically adjust the height based on the content
+              height: 'auto',
             }}
             exit={{
               opacity: 0,
@@ -157,14 +153,12 @@ export default function Comments() {
                   </div>
                 </div>
 
-                {/* Conditional rendering for likes */}
                 {message.likes && message.likes.length > 0 && (
                   <div className="main-card-like-container">
                     <div className="main-card-like-thumb">
                       <img src="./images/thumb" alt="like-thumb" />
                     </div>
                     <div className="main-card-like-likers">
-                      {/* You can map over the likes if they contain names or other info */}
                       {message.likes.map((like, idx) => (
                         <span key={idx}>{like}</span>
                       ))}

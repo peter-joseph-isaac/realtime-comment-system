@@ -1,11 +1,9 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "../auth/[...nextauth]/route"; // I
+import { authOptions } from "../auth/[...nextauth]/route";
 
 export async function POST(req) {
-    // Retrieve the session using getServerSession
     const session = await getServerSession(authOptions);
   
-    // If no session, return an error response
     if (!session) {
       return new Response(
         JSON.stringify({ message: "Unauthorized" }),

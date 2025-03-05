@@ -3,7 +3,6 @@ import { authOptions } from "../auth/[...nextauth]/route";
 import xss from 'xss';
 import Ably from 'ably';
 
-
 export async function POST(req) {
 
     const session = await getServerSession(authOptions);
@@ -16,7 +15,6 @@ export async function POST(req) {
     }
 
     const requestBody = await req.json();
-
 
     if(requestBody.likeId !== session.user.id){
         return new Response(
@@ -35,7 +33,6 @@ export async function POST(req) {
             { status: 400 }
         );
     }
-
 
     const comment = {
         type: 'like',

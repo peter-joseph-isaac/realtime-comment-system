@@ -1,8 +1,7 @@
 'use client';
 
 import React, { useRef, useState, useEffect } from 'react';
-import axios from 'axios';
-import './styles/ReplyForm.css'; // Ensure you have this CSS file
+import './styles/ReplyForm.css';
 
 const ReplyForm = ({ parentId, onClose }) => {
   const [replyText, setReplyText] = useState('');
@@ -11,7 +10,7 @@ const ReplyForm = ({ parentId, onClose }) => {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (textareaRef.current && !textareaRef.current.contains(event.target)) {
-        onClose(); // Hide the textarea
+        onClose();
       }
     };
 
@@ -25,26 +24,32 @@ const ReplyForm = ({ parentId, onClose }) => {
     setReplyText(event.target.value);
   };
 
-  const handleReplySubmit = async (event) => {
-    event.preventDefault(); // Prevent default form submission behavior
+ const handleReplySubmit = async (event) => {
+    event.preventDefault();
 
-    
-    const name = "Peter"; // This should ideally come from user state or context
-    const picture = "Some picture"; // This should ideally come from user state or context
-    const text = replyText || ""; // Ensure text is a string
+    const text = replyText || "";
 
     try {
-      await axios.post('/api/reply', {
-        name,
-        picture,
-        text,
-        parentId, // Include the parentId to associate the reply
+      const response = await fetch('/api/reply', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          text,
+          parentId,
+        }),
       });
-      setReplyText(''); // Clear the textarea after submission
-      onClose(); // Hide the textarea
+    
+      if (!response.ok) {
+        throw new Error('Something went wrong.');
+      }
+    
+      setReplyText('');
+      onClose();
     } catch (error) {
-      console.error('Error submitting reply:', error); // Log the error for debugging
-    }
+      console.error('Error submitting reply:', error);
+    }    
   };
 
   return (
