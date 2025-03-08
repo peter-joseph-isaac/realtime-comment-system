@@ -5,9 +5,11 @@ import './styles/commentsystem.css';
 import Ably from 'ably';
 import { motion, AnimatePresence } from 'framer-motion';
 
+
 export default function Comments() {
   const [messages, setMessages] = useState([]);
   const [token, setToken] = useState(null);
+  const [isLiking, setIsLiking] = useState(false);
 
   useEffect(() => {
     async function fetchToken() {
@@ -32,44 +34,45 @@ export default function Comments() {
         authUrl: '/api/ably',
         clientId: 'realtime-comment-system',
       });
-
+  
       const channel = ably.channels.get('channel1');
-      channel.subscribe('message', (message) => {
+  
+      const handleMessage = (message) => {
         const type = message.data.type;
         switch (type) {
           case 'main':
-            setMessages((m) => [{ ...message, likes: [], replies:[] },  ...m ]);
+            setMessages((m) => [{ ...message, likes: [], replies: [] }, ...m]);
             break;
           case 'reply':
-            alert('Reply');
-            setMessages((m) => [{ ...message, likes: [] },  ...m ]);
+            setMessages((m) => [{ ...message, likes: [] }, ...m]);
             break;
           case 'like':
-            alert('Like');
-            break;
-          case 'unlike':
-            alert('Unlike');
-            break;
-          case 'flag':
-            alert('Flag');
+            setMessages((m) =>
+              m.map((msg) =>
+                msg.data.comid === message.data.comid
+                  ? { ...msg, likes: [...msg.likes, { id: message.data.likeId, name: message.data.name, image: message.data.image }] }
+                  : msg
+              )
+            );
             break;
           case 'delete':
             setMessages((prevMessages) =>
-            prevMessages.filter((msg) => msg.data.comid !== message.data.deleteId));
-            break;
-          case 'ban':
-            alert('Banning User');
-            break;
-          case 'block':
-            alert('Blocking User');
+              prevMessages.filter((msg) => msg.data.comid !== message.data.deleteId)
+            );
             break;
           default:
-            alert('This is the default anything else!');
             break;
         }
-      });
+      };
+  
+      channel.subscribe('message', handleMessage);
+  
+      return () => {
+        channel.unsubscribe('message', handleMessage);
+        ably.close();
+      };
     }
-  }, [token]);
+  }, [token]);  
 
   const handleDelete = async (msgid, userid) => {
     try {
@@ -91,14 +94,17 @@ export default function Comments() {
     }
   };
 
-  const handleLike = async (comId, likeId) => {
+  const handleLike = async (comId) => {
+    if (isLiking) return;
+    setIsLiking(true);
+
     try {
       const response = await fetch('/api/like', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ comId, likeId }),
+        body: JSON.stringify({ comId }),
         credentials: 'same-origin',
       });
       if(!response.ok) {
@@ -106,6 +112,8 @@ export default function Comments() {
       }
     } catch (error) {
       console.error('There was an error', error);
+    } finally {
+      setTimeout(() => setIsLiking(false), 500);
     }
   };
 
@@ -124,7 +132,7 @@ export default function Comments() {
   return (
     <div>
       <AnimatePresence>
-        {messages.map((message, index) => (
+        {messages.map((message) => (
           <motion.div
             key={message.data.comid}
             layout
@@ -154,20 +162,24 @@ export default function Comments() {
                 </div>
 
                 {message.likes && message.likes.length > 0 && (
-                  <div className="main-card-like-container">
-                    <div className="main-card-like-thumb">
-                      <img src="./images/thumb" alt="like-thumb" />
+                    <div className="main-card-like-container">
+                      <div className="main-card-like-thumb">
+                        <img src="./images/likes.png" />
+                      </div>
+                      <div className="main-card-like-likers">
+                        {message.likes.map((like) => (
+                          <div key={like.id} className="like-user">
+                            <div className="like-image"><img src={like.image || "/default-avatar.png"} alt={like.name || "Unknown"} /></div>
+                            <div className="like-image">{like.name || "Anonymous"}</div>
+                          </div>
+                        ))}
+                        <div className="likes-this">likes this</div>
+                      </div>
                     </div>
-                    <div className="main-card-like-likers">
-                      {message.likes.map((like, idx) => (
-                        <span key={idx}>{like}</span>
-                      ))}
-                    </div>
-                  </div>
-                )}
+                  )}
 
                   <div className="main-card-footer">
-                    <div className="main-card-icon"><img width={16} height={16} src={null} /></div><div className="main-card-date"></div><div className="main-card-like"><span className="like" onClick={() => handleLike(message.data.comid, message.data.id)}>Like</span></div><div className="main-card-flag" ><span className="flag" onClick={() => handleDelete(message.data.comid, message.data.id)}>Flag</span></div><div className="main-card-reply"><span className="reply">Comment</span></div>
+                    <div className="main-card-icon"><img width={16} height={16} src="./images/comments.png" /></div><div className="main-card-date">Date</div><div className="main-card-like"><span className="like" onClick={() => handleLike(message.data.comid)}>Like</span></div><div className="main-card-flag" ><span className="flag" onClick={() => handleDelete(message.data.comid, message.data.id)}>Flag</span></div><div className="main-card-reply"><span className="reply">Reply</span></div>
                   </div>
                 </div>
             <div className="main-card-basement"></div>

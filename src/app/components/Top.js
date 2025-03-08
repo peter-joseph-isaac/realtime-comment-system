@@ -16,7 +16,7 @@ const Top = () => {
         </div>
       </div>
       <div id="top-right">
-       <button onClick={() => signIn("google")}>Sign In with Google</button>
+       <button id ="sign-in-button" onClick={() => signIn("google")}>Sign In with Google</button>
       </div>
     </div>
   </div>

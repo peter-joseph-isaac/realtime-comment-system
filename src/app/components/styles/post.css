@@ -19,3 +19,7 @@
     font-weight: bold;
     text-transform: uppercase;
 }
+
+#mainButton:hover {
+    background-color: #8c8c8c33;
+}

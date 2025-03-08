@@ -27,6 +27,20 @@
     font-weight: bold;
 }
 
+#sign-in-button {
+    width: 160px;
+    height: 30px;
+    color: #333333;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 1px solid #333333;
+}
+
+#sign-in-button:hover {
+    background-color: #8c8c8c33;
+}
+
 #sign-out-button {
     width: 75px;
     height: 30px;

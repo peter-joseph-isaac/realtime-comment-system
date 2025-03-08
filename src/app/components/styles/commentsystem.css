@@ -72,8 +72,9 @@
 }
 
 .main-card-like-container {
-    width: 400px;
-    height: 20px;
+    width: 600px;
+    min-height: 20px;
+    padding: 10px 0px 0px 70px;
     background-color: transparent;
     display: flex;
     flex-direction: row;
@@ -83,13 +84,46 @@
 .main-card-like-thumb {
     width: 16px;
     height: 16px;
+    margin: 0px 10px 10px 0px;
     background-color: transparent;
 }
 
 .main-card-like-likers {
-    width: 200px;
-    height: 20px;
+    width: auto;
+    min-height: 20px;
     background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: black;
+    font-weight: bold;
+}
+
+.main-card-like-likers img {
+    width: 20px;
+    height: 20px;
+}
+
+.like-user{
+    display: flex;
+    flex-direction: row;
+}
+
+.like-image {
+    padding: 0px 5px 5px 0px;
+}
+
+.like-name {
+    padding: 0px 5px 5px 0px;
+}
+
+.likes-this {
+    height: 30px;
+    font-size: 13px;
+    color: black;
+    font-weight: bold;
+    margin: 0px 0px 0px 10px;
 }
 
 .main-card-footer {
@@ -119,7 +153,6 @@
     color: black;
     font-size: 13px;
     font-weight: bold;
-    margin-left: 40px;
 }
 
 .main-card-flag {
@@ -150,12 +183,21 @@ shared css between main and reply cards
 
 .like {
     cursor: pointer;
+    background:url("/images/like-icon.png") no-repeat scroll 0 -2px transparent; 
+    margin:0 0 0 20px;
+    padding:0 0 0 20px;
 }
 
 .flag {
     cursor: pointer;
+    background:url("/images/flag-icon.png") no-repeat scroll 0 -2px transparent; 
+    margin:0 0 0 20px;
+    padding:0 0 0 20px;
 }
 
 .reply {
     cursor: pointer;
+    background:url("/images/reply-icon.png") no-repeat scroll 0 -2px transparent; 
+    margin:0 0 0 20px;
+    padding:0 0 0 20px;
 }

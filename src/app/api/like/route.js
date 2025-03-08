@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
 import xss from 'xss';
 import Ably from 'ably';
+import { v4 as uuidv4 } from 'uuid';
 
 export async function POST(req) {
 
@@ -16,15 +17,7 @@ export async function POST(req) {
 
     const requestBody = await req.json();
 
-    if(requestBody.likeId !== session.user.id){
-        return new Response(
-            JSON.stringify({ message: "Unauthorized"}),
-            { status: 401 }
-        );
-    }
-
     const sanitizedComId = xss(requestBody.comId);
-    const sanitizedId = xss(requestBody.likeId);
 
     if (!sanitizedComId) {
         console.log("Empty Comment");
@@ -34,10 +27,15 @@ export async function POST(req) {
         );
     }
 
+    const likerId = uuidv4();
+
     const comment = {
         type: 'like',
+        comid: sanitizedComId,
         id: session.user.id,
-        likeId: sanitizedId
+        image: session.user.image,
+        name: session.user.name,
+        likeId: likerId
     };
 
     try {
